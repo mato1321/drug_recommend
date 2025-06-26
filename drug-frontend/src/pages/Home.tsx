@@ -7,11 +7,15 @@ const Home = () => {
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
           {/* 標題區域 */}
           <div className="px-8 pt-8 pb-6 text-center bg-gradient-to-b from-white to-gray-50">
-            <div className="mx-auto mb-6 w-20 h-20 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center shadow-lg">
-              <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center">
-                <div className="w-6 h-6 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-lg"></div>
-              </div>
-            </div>
+          
+          <div className="mx-auto mb-6 flex items-center justify-center">
+          	 <img 
+    		   src="/favicon.ico" 
+    		   alt="Logo" 
+    		   className="w-20 h-20 rounded-2xl shadow-lg"
+  		  />
+		</div>	
+			            
             <h1 className="text-3xl font-bold text-gray-800 mb-2">歡迎使用</h1>
             <p className="text-gray-500 text-sm">藥物推薦系統</p>
           </div>
