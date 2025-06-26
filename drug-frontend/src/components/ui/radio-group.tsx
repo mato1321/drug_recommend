@@ -1,70 +1,42 @@
-import React from 'react';
+import * as React from "react"
+import * as RadioGroupPrimitive from "@radix-ui/react-radio-group"
+import { Circle } from "lucide-react"
 
-interface RadioGroupProps {
-  value?: string;
-  onValueChange?: (value: string) => void;
-  children: React.ReactNode;
-  className?: string;
-}
+import { cn } from "@/lib/utils"
 
-interface RadioGroupItemProps {
-  value: string;
-  id?: string;
-  className?: string;
-  children?: React.ReactNode;
-}
-
-export const RadioGroup: React.FC<RadioGroupProps> = ({ 
-  value, 
-  onValueChange, 
-  children, 
-  className = '' 
-}) => {
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (onValueChange) {
-      onValueChange(event.target.value);
-    }
-  };
-
+const RadioGroup = React.forwardRef<
+  React.ElementRef<typeof RadioGroupPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>
+>(({ className, ...props }, ref) => {
   return (
-    <div className={`space-y-2 ${className}`} role="radiogroup">
-      {React.Children.map(children, (child) => {
-        if (React.isValidElement(child)) {
-          return React.cloneElement(child, {
-            checked: child.props.value === value,
-            onChange: handleChange,
-          } as any);
-        }
-        return child;
-      })}
-    </div>
-  );
-};
+    <RadioGroupPrimitive.Root
+      className={cn("grid gap-2", className)}
+      {...props}
+      ref={ref}
+    />
+  )
+})
+RadioGroup.displayName = RadioGroupPrimitive.Root.displayName
 
-export const RadioGroupItem: React.FC<RadioGroupItemProps & React.InputHTMLAttributes<HTMLInputElement>> = ({ 
-  value, 
-  id, 
-  className = '', 
-  children,
-  ...props 
-}) => {
+const RadioGroupItem = React.forwardRef<
+  React.ElementRef<typeof RadioGroupPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>
+>(({ className, ...props }, ref) => {
   return (
-    <div className={`flex items-center space-x-2 ${className}`}>
-      <input
-        type="radio"
-        id={id || value}
-        value={value}
-        className="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
-        {...props}
-      />
-      {children && (
-        <label 
-          htmlFor={id || value} 
-          className="text-sm font-medium text-gray-700 cursor-pointer"
-        >
-          {children}
-        </label>
+    <RadioGroupPrimitive.Item
+      ref={ref}
+      className={cn(
+        "aspect-square h-4 w-4 rounded-full border border-primary text-primary ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+        className
       )}
-    </div>
-  );
-};
+      {...props}
+    >
+      <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
+        <Circle className="h-2.5 w-2.5 fill-current text-current" />
+      </RadioGroupPrimitive.Indicator>
+    </RadioGroupPrimitive.Item>
+  )
+})
+RadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName
+
+export { RadioGroup, RadioGroupItem }
