@@ -1,17 +1,26 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const TermsOfService = () => {
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1); // 返回上一頁
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-100 via-blue-200 to-blue-300 p-4">
       <div className="max-w-2xl mx-auto">
         <div className="mb-6">
-          <Link to="/" className="inline-flex items-center text-blue-600 hover:text-blue-800">
+          <button 
+            onClick={handleGoBack}
+            className="inline-flex items-center text-blue-600 hover:text-blue-800 cursor-pointer"
+          >
             <ArrowLeft className="w-4 h-4 mr-2" />
-            返回
-          </Link>
+            返回上一頁
+          </button>
         </div>
         
         <Card>
@@ -93,7 +102,7 @@ const TermsOfService = () => {
             </div>
 
             <div className="text-center text-sm text-gray-500 border-t pt-4">
-              <p>最後更新時間：2024年10月25日</p>
+              <p>最後更新時間：2025年7月1日</p>
               <p>本條款受中華民國法律管轄並依其解釋條款</p>
             </div>
           </CardContent>
